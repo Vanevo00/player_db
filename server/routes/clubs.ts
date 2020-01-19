@@ -30,7 +30,7 @@ router.get('/', async (req: Request, res: Response) => {
 router.post('/', auth, [ // auth middleware to be added
   check('name', 'club name is required').not().isEmpty(),
   check('country', 'country name is required').not().isEmpty(),
-], async (req: Request, res: Response) => {
+], async (req: any, res: Response) => {
   const errors = validationResult(req)
   if(!errors.isEmpty()) {
     return res.status(400).json({errors: errors.array()})
@@ -48,7 +48,8 @@ router.post('/', auth, [ // auth middleware to be added
     const newClub = new Club({
       name,
       country,
-      image
+      image,
+      user: req.user.id
     })
 
     const club = await newClub.save()
