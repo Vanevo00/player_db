@@ -1,4 +1,4 @@
-export {} //avoiding TS redeclaration error
+export {} // avoiding TS redeclaration error
 const mongoose = require('mongoose')
 
 const ClubSchema = mongoose.Schema({
@@ -21,7 +21,7 @@ const ClubSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectID,
     ref: 'users'
-  },
+  }
 })
 
 module.exports = mongoose.model('club', ClubSchema)

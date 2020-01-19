@@ -14,15 +14,15 @@ const UserSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    required : true,
+    required: true,
     minLength: 6
   },
   image: {
     type: String
   },
-  favorite_club: {
+  favoriteClub: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "clubs"
+    ref: 'clubs'
   },
   is_admin: {
     type: Boolean,
@@ -31,7 +31,7 @@ const UserSchema = mongoose.Schema({
   created_at: {
     type: Date,
     default: Date.now()
-  },
+  }
 })
 
 module.exports = mongoose.model('user', UserSchema)

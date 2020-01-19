@@ -8,11 +8,11 @@ const port = 4000
 // connect database
 connectDB()
 
-//middleware
+// middleware
 // @ts-ignore
-app.use(express.json({ extended: false })) //to accept body data
+app.use(express.json({ extended: false })) // to accept body data
 
-//define routes
+// define routes
 app.use('/api/users', require('./routes/users'))
 app.use('/api/clubs', require('./routes/clubs'))
 app.use('/api/auth', require('./routes/auth'))

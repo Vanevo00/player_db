@@ -11,38 +11,38 @@ interface RequestUser extends Request {
   user: string
 }
 
-//@route  GET api/clubs
-//@desc   Get all clubs
-//@access Public
+// @route  GET api/clubs
+// @desc   Get all clubs
+// @access Public
 router.get('/', async (req: Request, res: Response) => {
   try {
     const allClubs = await Club.find({})
     res.json(allClubs)
-  } catch(err) {
+  } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
   }
 })
 
-//@route  POST  api/clubs
-//@desc   Add new club
-//@access Registered users
+// @route  POST  api/clubs
+// @desc   Add new club
+// @access Registered users
 router.post('/', auth, [ // auth middleware to be added
   check('name', 'club name is required').not().isEmpty(),
-  check('country', 'country name is required').not().isEmpty(),
+  check('country', 'country name is required').not().isEmpty()
 ], async (req: any, res: Response) => {
   const errors = validationResult(req)
-  if(!errors.isEmpty()) {
-    return res.status(400).json({errors: errors.array()})
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
   }
 
   const { name, country, image } = req.body
 
   try {
-    let existingClub =  await Club.findOne({name})
+    const existingClub = await Club.findOne({ name })
 
     if (existingClub) {
-      return res.status(400).json({msg: 'club with this name already exists'})
+      return res.status(400).json({ msg: 'club with this name already exists' })
     }
 
     const newClub = new Club({
@@ -55,38 +55,38 @@ router.post('/', auth, [ // auth middleware to be added
     const club = await newClub.save()
 
     res.json(club)
-  } catch(err) {
+  } catch (err) {
     console.error(err)
-    res.status(500).send("an error has occurred")
+    res.status(500).send('an error has occurred')
   }
 })
 
-//@route  PUT api/clubs
-//@desc   Update club information
-//@access Admin only
+// @route  PUT api/clubs
+// @desc   Update club information
+// @access Admin only
 router.put('/:id', auth, async (req: Request, res: Response) => {
   try {
     // @ts-ignore
-    const user =  await User.findOne({_id: req.user.id})
-    if(!user.isAdmin) {
+    const user = await User.findOne({ _id: req.user.id })
+    if (!user.isAdmin) {
       return res.send('unauthorised, admins only')
     }
     await Club.findByIdAndUpdate(req.params.id, req.body)
     res.json(req.body)
-  } catch(err) {
+  } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
   }
 })
 
-//@route  DELETE api/clubs
-//@desc   Delete Club
-//@access Admin only
-router.delete('/:id', async (req: Request, res: Response) => { //auth middleware to be added
+// @route  DELETE api/clubs
+// @desc   Delete Club
+// @access Admin only
+router.delete('/:id', async (req: Request, res: Response) => { // auth middleware to be added
   try {
-    await Club.deleteOne( { _id: req.params.id } )
+    await Club.deleteOne({ _id: req.params.id })
     res.send('delete successful')
-  } catch(err) {
+  } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
   }
