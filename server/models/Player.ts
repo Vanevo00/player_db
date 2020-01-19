@@ -1,17 +1,27 @@
 export {} // avoiding TS redeclaration error
 const mongoose = require('mongoose')
 
-const ClubSchema = mongoose.Schema({
-  name: {
+const PlayerSchema = mongoose.Schema({
+  firstName: {
     type: String,
     required: true,
-    unique: true
   },
-  country: {
+  lastName: {
     type: String,
     required: true
   },
-  image: {
+  alias: {
+    type: String
+  },
+  club: {
+    type: mongoose.Schema.Types.ObjectID,
+    ref: 'clubs',
+    required: true
+  },
+  birthDate: {
+    type: Date
+  },
+  mainImage: {
     type: String
   },
   createdAt: {
@@ -24,4 +34,4 @@ const ClubSchema = mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('club', ClubSchema)
+module.exports = mongoose.model('player', PlayerSchema)

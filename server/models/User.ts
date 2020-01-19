@@ -24,11 +24,11 @@ const UserSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'clubs'
   },
-  is_admin: {
+  isAdmin: {
     type: Boolean,
     default: false
   },
-  created_at: {
+  createdAt: {
     type: Date,
     default: Date.now()
   }

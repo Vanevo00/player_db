@@ -64,9 +64,8 @@ router.post('/', auth, [ // auth middleware to be added
 // @route  PUT api/clubs
 // @desc   Update club information
 // @access Admin only
-router.put('/:id', auth, async (req: Request, res: Response) => {
+router.put('/:id', auth, async (req: any, res: Response) => {
   try {
-    // @ts-ignore
     const user = await User.findOne({ _id: req.user.id })
     if (!user.isAdmin) {
       return res.send('unauthorised, admins only')
@@ -82,8 +81,12 @@ router.put('/:id', auth, async (req: Request, res: Response) => {
 // @route  DELETE api/clubs
 // @desc   Delete Club
 // @access Admin only
-router.delete('/:id', async (req: Request, res: Response) => { // auth middleware to be added
+router.delete('/:id', auth, async (req: any, res: Response) => { // auth middleware to be added
   try {
+    const user = await User.findOne({ _id: req.user.id })
+    if (!user.isAdmin) {
+      return res.send('unauthorised, admins only')
+    }
     await Club.deleteOne({ _id: req.params.id })
     res.send('delete successful')
   } catch (err) {

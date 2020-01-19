@@ -8,6 +8,24 @@ const config = require('config')
 const router = express.Router()
 
 const User = require('../models/User') // importing the User model
+const auth = require('../middleware/auth')
+
+// @route  GET api/users
+// @desc   Get a list of all users
+// @access Admin only
+router.get('/', auth, async (req: any, res: Response) => {
+  try {
+    const loggedInUser = await User.findOne({ _id: req.user.id })
+    if (!loggedInUser.isAdmin) {
+      return res.send('unauthorised, admins only')
+    }
+    const allUsers = await User.find({})
+    res.json(allUsers)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
 
 // @route  POST api/users
 // @desc   Register a user
@@ -58,6 +76,40 @@ router.post('/', [
       if (err) throw err
       res.json({ token })
     })
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
+// @route  PUT api/users
+// @desc   Update User information
+// @access Admin only
+router.put('/:id', auth, async (req: any, res: Response) => {
+  try {
+    const user = await User.findOne({ _id: req.user.id })
+    if (!user.isAdmin) {
+      return res.send('unauthorised, admins only')
+    }
+    await User.findByIdAndUpdate(req.params.id, req.body)
+    res.json(req.body)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
+// @route  DELETE api/users
+// @desc   Delete User
+// @access Admin only
+router.delete('/:id', auth, async (req: any, res: Response) => { // auth middleware to be added
+  try {
+    const user = await User.findOne({ _id: req.user.id })
+    if (!user.isAdmin) {
+      return res.send('unauthorised, admins only')
+    }
+    await User.deleteOne({ _id: req.params.id })
+    res.send('delete successful')
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
