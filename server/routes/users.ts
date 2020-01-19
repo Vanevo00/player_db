@@ -13,7 +13,6 @@ const User = require('../models/User') //importing the User model
 //@desc   Register a user
 //@access Public
 router.post('/', [
-  check('username', 'username is required').not().isEmpty(),
   check('username', 'username must consist of 3 or more characters').isLength({min: 3}),
   check('email', 'please include a valid email').isEmail(),
   check('password', 'please enter a password with 6 or more characters').isLength({min: 6})

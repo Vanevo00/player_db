@@ -22,7 +22,7 @@ const UserSchema = mongoose.Schema({
   },
   favorite_club: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Club"
+    ref: "clubs"
   },
   is_admin: {
     type: Boolean,

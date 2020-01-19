@@ -14,6 +14,8 @@ app.use(express.json({ extended: false })) //to accept body data
 
 //define routes
 app.use('/api/users', require('./routes/users'))
+app.use('/api/clubs', require('./routes/clubs'))
+app.use('/api/auth', require('./routes/auth'))
 
 app.get('/', (req: Request, res: Response) => res.send('Welcome to player_db API'))
 
