@@ -6,15 +6,18 @@
   "scripts": {
     "start": "nodemon",
     "build": "rm -rf ./build && tsc",
-    "eslint": "eslint \"src/**\"",
-    "eslint:fix": "eslint --fix \"src/**\""
+    "eslint": "eslint \"server/**\"",
+    "eslint:fix": "eslint --fix \"server/**\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.7",
     "config": "^3.2.4",
     "express": "^4.17.1",
+    "express-validator": "^6.3.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.7"
   },
   "devDependencies": {
