@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon",
+    "start:api": "nodemon",
+    "start:client": "npm run dev --prefix client",
+    "start:watch": "concurrently \"npm run start:api\" \"npm run start:client\"",
     "build": "rm -rf ./build && tsc",
     "eslint": "eslint \"server/**\"",
     "eslint:fix": "eslint --fix \"server/**\""
@@ -14,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.7",
+    "concurrently": "^5.0.2",
     "config": "^3.2.4",
     "express": "^4.17.1",
     "express-validator": "^6.3.1",
