@@ -62,7 +62,7 @@ router.put('/:id', auth, async (req: any, res: Response) => {
   try {
     const [loggedInUser, playerToBeUpdated] = await Promise.all([
       User.findOne({ _id: req.user.id }),
-      Player.findOne({ _id: req.params.id})
+      Player.findOne({ _id: req.params.id })
     ])
     if (loggedInUser.isAdmin || String(playerToBeUpdated.user) === String(loggedInUser._id)) {
       await Player.findByIdAndUpdate(req.params.id, req.body)
@@ -83,7 +83,7 @@ router.delete('/:id', auth, async (req: any, res: Response) => { // auth middlew
   try {
     const [loggedInUser, playerToBeUpdated] = await Promise.all([
       User.findOne({ _id: req.user.id }),
-      Player.findOne({ _id: req.params.id})
+      Player.findOne({ _id: req.params.id })
     ])
     if (loggedInUser.isAdmin || String(playerToBeUpdated.user) === String(loggedInUser._id)) {
       await Player.deleteOne({ _id: req.params.id })

@@ -8,8 +8,8 @@
     "start:client": "npm run dev --prefix client",
     "start:watch": "concurrently \"npm run start:api\" \"npm run start:client\"",
     "build": "rm -rf ./build && tsc",
-    "eslint": "eslint \"server/**\"",
-    "eslint:fix": "eslint --fix \"server/**\""
+    "eslint": "eslint \"./**\"",
+    "eslint:fix": "eslint --fix \"./**\""
   },
   "keywords": [],
   "author": "",
