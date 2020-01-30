@@ -1,22 +1,15 @@
-// eslint-disable-next-line
 import React from 'react'
+import Layout from '../components/Layout'
+import { GrowContainer } from '../components/StyledContainers'
 
 const Index = () => {
   return (
-    <div className="row">
-      <div className="col s1 blue"><i className="material-icons">add</i></div>
-      <div className="col s1 red">2</div>
-      <div className="col s1 red">3</div>
-      <div className="col s1 red">4</div>
-      <div className="col s1 red">5</div>
-      <div className="col s1 red">6</div>
-      <div className="col s1 red">7</div>
-      <div className="col s1 red">8</div>
-      <div className="col s1 red">9</div>
-      <div className="col s1 red">10</div>
-      <div className="col s1 red">11</div>
-      <div className="col s1 red">12</div>
-    </div>
+    <Layout title='Home'>
+      <GrowContainer>
+        <h2>Index page</h2>
+      </GrowContainer>
+    </Layout>
+
   )
 }
 
