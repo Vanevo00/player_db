@@ -6,7 +6,7 @@ export const Button = styled.button`
   border: none;
   height: 2rem;
   font-size: ${props => props.theme.fontSizes.m};
-  color: ${props => props.theme.colors.mainText};
+  color: ${props => props.theme.colors.buttonText};
   
   &:hover {
     background-color: ${props => props.theme.colors.mainLighter};

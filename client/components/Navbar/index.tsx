@@ -10,7 +10,7 @@ import {
   NavbarContainer,
   SearchContainer, ConfirmText, RedButtonMarginRight
 } from './StyledNavbar'
-import {Button} from '../StyledButtons';
+import { Button } from '../StyledButtons'
 
 interface Props {
   isAuthenticated: boolean
@@ -24,7 +24,7 @@ interface Props {
   handleLogout: () => void
 }
 
-const Navbar = ({isAuthenticated, user, handleLogout}: Props) => {
+const Navbar = ({ isAuthenticated, user, handleLogout }: Props) => {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
 
   const logoutClick = () => {
@@ -47,8 +47,8 @@ const Navbar = ({isAuthenticated, user, handleLogout}: Props) => {
           <LinkText>Clubs</LinkText>
           <LinkText>Players</LinkText>
           {
-            isAuthenticated ?
-              <>
+            isAuthenticated
+              ? <>
                 {user &&
                   <>
                     <LinkText>{user.username}</LinkText>
@@ -56,8 +56,7 @@ const Navbar = ({isAuthenticated, user, handleLogout}: Props) => {
                   </>
                 }
               </>
-              :
-              <>
+              : <>
                 <Link href='/user/login'>
                   <LinkText>Login</LinkText>
                 </Link>
@@ -72,9 +71,9 @@ const Navbar = ({isAuthenticated, user, handleLogout}: Props) => {
       <DarkenBackground show={showLogoutConfirm}>
         <LogoutConfirmContainer>
           <div>
-          <ConfirmText>Are you sure you want to log out?</ConfirmText>
-          <RedButtonMarginRight onClick={logoutClick}>Yes</RedButtonMarginRight>
-          <Button onClick={() => setShowLogoutConfirm(false)}>No</Button>
+            <ConfirmText>Are you sure you want to log out?</ConfirmText>
+            <RedButtonMarginRight onClick={logoutClick}>Yes</RedButtonMarginRight>
+            <Button onClick={() => setShowLogoutConfirm(false)}>No</Button>
           </div>
         </LogoutConfirmContainer>
       </DarkenBackground>

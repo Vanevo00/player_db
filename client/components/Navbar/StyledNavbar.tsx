@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {RedButton} from '../StyledButtons';
+import { RedButton } from '../StyledButtons'
 
 export const NavbarContainer = styled.div`
   height: 60px;
@@ -54,7 +54,7 @@ export const LogoutConfirmContainer = styled.div`
 `
 
 export const ConfirmText = styled.p`
-  color: ${props => props.theme.colors.formText};
+  color: ${props => props.theme.colors.mainText};
   margin-bottom: 5px;
 `
 

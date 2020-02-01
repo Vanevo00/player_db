@@ -44,10 +44,16 @@ router.post('/', [
   const email = req.body.email.toLowerCase()
 
   try {
-    let user = await User.findOne({ email }) // try to find user by the email
+    let user = await User.findOne({ username }) // try to find user by the email
 
     if (user) {
-      return res.status(400).json({ "errors": [{msg: 'user with this email address already exists'}] })
+      return res.status(400).json({ errors: [{ msg: 'user with this username already exists' }] })
+    }
+
+    user = await User.findOne({ email }) // try to find user by the email
+
+    if (user) {
+      return res.status(400).json({ errors: [{ msg: 'user with this email address already exists' }] })
     }
 
     user = new User({

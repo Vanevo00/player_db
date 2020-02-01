@@ -7,13 +7,13 @@ const theme = {
     dangerLighter: '#d80507',
     mainBackground: '#fff',
     formBackground: '#fff',
-    formText: '#000',
+    mainText: '#000',
     black: '#000',
     formBorder: '#a6a6a6',
-    mainText: '#fff',
+    buttonText: '#fff',
     menuText: '#fff',
 
-    error: '#ce0006',
+    error: '#ce0006'
   },
   fontSizes: {
     xs: '.9rem',

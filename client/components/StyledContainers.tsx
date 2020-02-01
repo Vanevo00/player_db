@@ -10,11 +10,12 @@ export const GrowContainer = styled.div`
   flex-grow: 1;
   width: 100%;
   background-color: ${props => props.theme.colors.mainBackground};
+  color: ${props => props.theme.colors.mainBackground};
 `
 
 export const FormContainer = styled.div`
   border: solid 2px ${props => props.theme.colors.main};
-  color: ${props => props.theme.colors.formText};
+  color: ${props => props.theme.colors.mainText};
   border-radius: 4px;
   padding: 1rem;
   display: flex;

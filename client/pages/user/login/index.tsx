@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import Layout from '../../../components/Layout'
 import { InputContainer, StyledLabel, UserContainer, StyledTextInput, ErrorMessage } from '../StyledUserPages'
 import { FormContainer } from '../../../components/StyledContainers'
 import { WideButton } from '../../../components/StyledButtons'
 import axios from 'axios'
-import setAuthToken from '../setAuthToken';
+import setAuthToken from '../setAuthToken'
 
 const Login = () => {
   const [inputData, setInputData] = useState({
     username: '',
-    password: '',
+    password: ''
   })
   const [errors, setErrors] = useState([])
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -18,7 +18,7 @@ const Login = () => {
   const { username, password } = inputData
 
   const loadUser = async () => {
-    if(localStorage.token) {
+    if (localStorage.token) {
       setAuthToken(localStorage.token)
     }
 
@@ -57,7 +57,7 @@ const Login = () => {
       })
       localStorage.setItem('token', data.data.token)
       loadUser()
-    } catch(err) {
+    } catch (err) {
       const errArr = []
       err.response.data.errors.map(error => {
         errArr.push(error.msg)

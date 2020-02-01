@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import Layout from '../../../components/Layout'
 import { InputContainer, StyledLabel, UserContainer, StyledTextInput, ErrorMessage } from '../StyledUserPages'
 import { FormContainer } from '../../../components/StyledContainers'
 import { WideButton } from '../../../components/StyledButtons'
 import axios from 'axios'
-import setAuthToken from '../setAuthToken';
+import setAuthToken from '../setAuthToken'
 
 const Register = () => {
   const [inputData, setInputData] = useState({
@@ -20,7 +20,7 @@ const Register = () => {
   const { username, email, password, confirmPassword } = inputData
 
   const loadUser = async () => {
-    if(localStorage.token) {
+    if (localStorage.token) {
       setAuthToken(localStorage.token)
     }
 
@@ -63,7 +63,7 @@ const Register = () => {
       })
       localStorage.setItem('token', data.data.token)
       loadUser()
-    } catch(err) {
+    } catch (err) {
       const errArr = []
       err.response.data.errors.map(error => {
         errArr.push(error.msg)
