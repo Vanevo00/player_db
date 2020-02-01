@@ -7,6 +7,18 @@ export const Button = styled.button`
   height: 2rem;
   font-size: ${props => props.theme.fontSizes.m};
   color: ${props => props.theme.colors.mainText};
+  
+  &:hover {
+    background-color: ${props => props.theme.colors.mainLighter};
+  }
+`
+
+export const RedButton = styled(Button)`
+  background-color: ${props => props.theme.colors.danger};
+  
+  &:hover {
+    background-color: ${props => props.theme.colors.dangerLighter};
+  }
 `
 
 export const WideButton = styled(Button)`

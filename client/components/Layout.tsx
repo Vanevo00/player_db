@@ -1,12 +1,42 @@
-import React, { Fragment } from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import Head from 'next/head'
 import Navbar from './Navbar'
 import GlobalStyle from './GlobalStyle'
 import { ThemeProvider } from 'styled-components'
 import theme from './ThemeProvider'
 import { MainContainer } from './StyledContainers'
+import setAuthToken from '../pages/user/setAuthToken';
+import axios from 'axios';
 
 const Layout = (props) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [user, setUser] = useState()
+
+  const loadUser = async () => {
+    if(localStorage.token) {
+      setAuthToken(localStorage.token)
+    }
+
+    try {
+      const data = await axios.get('http://localhost:4000/api/auth')
+
+      setIsAuthenticated(true)
+      setUser(data.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    loadUser()
+  }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    setIsAuthenticated(false)
+    setUser(null)
+  }
+
   return (
     <Fragment>
       <Head>
@@ -16,7 +46,7 @@ const Layout = (props) => {
         <ThemeProvider theme={theme}>
           <GlobalStyle/>
           <MainContainer>
-            <Navbar/>
+            <Navbar isAuthenticated={isAuthenticated} user={user} handleLogout={handleLogout}/>
             {props.children}
           </MainContainer>
         </ThemeProvider>

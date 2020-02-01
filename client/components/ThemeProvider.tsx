@@ -1,14 +1,19 @@
 const theme = {
   colors: {
     main: '#00700c',
+    mainLighter: '#00a00c',
     mainDarker: '#00440c',
+    danger: '#aa0507',
+    dangerLighter: '#d80507',
     mainBackground: '#fff',
     formBackground: '#fff',
     formText: '#000',
+    black: '#000',
     formBorder: '#a6a6a6',
     mainText: '#fff',
     menuText: '#fff',
-    error: '#ce0006'
+
+    error: '#ce0006',
   },
   fontSizes: {
     xs: '.9rem',
