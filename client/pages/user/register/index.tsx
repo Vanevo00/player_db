@@ -8,7 +8,7 @@ import axios from 'axios'
 import setAuthToken from '../setAuthToken';
 
 const Register = () => {
-  const [user, setUser] = useState({
+  const [inputData, setInputData] = useState({
     username: '',
     email: '',
     password: '',
@@ -17,7 +17,7 @@ const Register = () => {
   const [errors, setErrors] = useState([])
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  const { username, email, password, confirmPassword } = user
+  const { username, email, password, confirmPassword } = inputData
 
   const loadUser = async () => {
     if(localStorage.token) {
@@ -44,8 +44,8 @@ const Register = () => {
   }, [])
 
   const onChange = (e) => {
-    setUser({
-      ...user,
+    setInputData({
+      ...inputData,
       [e.target.name]: e.target.value
     })
   }

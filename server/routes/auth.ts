@@ -40,13 +40,13 @@ router.post('/', [
     const user = await User.findOne({ username })
 
     if (!user) {
-      return res.status(400).json({ msg: 'Invalid Credentials' })
+      return res.status(400).json({ 'errors': [{msg: 'Invalid Credentials'}]})
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
 
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid Password' })
+      return res.status(400).json({ 'errors': [{msg: 'Invalid Password'}]})
     }
 
     // json web token creation

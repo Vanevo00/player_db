@@ -7,6 +7,7 @@ import theme from './ThemeProvider'
 import { MainContainer } from './StyledContainers'
 import setAuthToken from '../pages/user/setAuthToken';
 import axios from 'axios';
+import AdminNavbar from './AdminNavbar';
 
 const Layout = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -33,6 +34,7 @@ const Layout = (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
+    delete axios.defaults.headers.common['x-auth-token']
     setIsAuthenticated(false)
     setUser(null)
   }
@@ -47,6 +49,7 @@ const Layout = (props) => {
           <GlobalStyle/>
           <MainContainer>
             <Navbar isAuthenticated={isAuthenticated} user={user} handleLogout={handleLogout}/>
+            {user && user.isAdmin && <AdminNavbar/>}
             {props.children}
           </MainContainer>
         </ThemeProvider>

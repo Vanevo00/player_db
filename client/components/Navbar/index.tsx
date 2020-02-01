@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import {
   LinkContainer,
@@ -58,7 +58,7 @@ const Navbar = ({isAuthenticated, user, handleLogout}: Props) => {
               </>
               :
               <>
-                <Link href='/user/register'>
+                <Link href='/user/login'>
                   <LinkText>Login</LinkText>
                 </Link>
                 <Link href='/user/register'>

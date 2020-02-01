@@ -7,17 +7,15 @@ import { WideButton } from '../../../components/StyledButtons'
 import axios from 'axios'
 import setAuthToken from '../setAuthToken';
 
-const Register = () => {
-  const [user, setUser] = useState({
+const Login = () => {
+  const [inputData, setInputData] = useState({
     username: '',
-    email: '',
     password: '',
-    confirmPassword: ''
   })
   const [errors, setErrors] = useState([])
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  const { username, email, password, confirmPassword } = user
+  const { username, password } = inputData
 
   const loadUser = async () => {
     if(localStorage.token) {
@@ -44,21 +42,17 @@ const Register = () => {
   }, [])
 
   const onChange = (e) => {
-    setUser({
-      ...user,
+    setInputData({
+      ...inputData,
       [e.target.name]: e.target.value
     })
   }
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    if (password !== confirmPassword) {
-      return setErrors(['passwords do not match'])
-    }
     try {
-      const data = await axios.post('http://localhost:4000/api/users', {
+      const data = await axios.post('http://localhost:4000/api/auth', {
         username,
-        email,
         password
       })
       localStorage.setItem('token', data.data.token)
@@ -76,10 +70,10 @@ const Register = () => {
   }
 
   return (
-    <Layout title='Register'>
+    <Layout title='Login'>
       <UserContainer>
         <FormContainer>
-          <h2>Create Account</h2>
+          <h2>Log in</h2>
           {errors.length > 0 && errors.map(error =>
             <ErrorMessage>{error}</ErrorMessage>
           )}
@@ -89,18 +83,10 @@ const Register = () => {
               <StyledTextInput type='text' name='username' onChange={onChange}/>
             </InputContainer>
             <InputContainer>
-              <StyledLabel htmlFor='email'>email</StyledLabel><br/>
-              <StyledTextInput type='email' name='email' onChange={onChange}/>
-            </InputContainer>
-            <InputContainer>
               <StyledLabel htmlFor='password'>password</StyledLabel><br/>
               <StyledTextInput type='password' name='password' onChange={onChange}/>
             </InputContainer>
-            <InputContainer>
-              <StyledLabel htmlFor='confirmPassword'>re-enter password</StyledLabel><br/>
-              <StyledTextInput type='password' name='confirmPassword' onChange={onChange}/>
-            </InputContainer>
-            <WideButton type="submit">Register</WideButton>
+            <WideButton type="submit">Login</WideButton>
           </form>
         </FormContainer>
       </UserContainer>
@@ -108,4 +94,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login
