@@ -52,6 +52,7 @@ const Layout = (props) => {
           {user && user.isAdmin && <AdminNavbar/>}
           {props.children}
         </MainContainer>
+        <script src="https://kit.fontawesome.com/3bca9cb446.js" crossOrigin="anonymous"></script>
       </ThemeProvider>
     </Fragment>
   )

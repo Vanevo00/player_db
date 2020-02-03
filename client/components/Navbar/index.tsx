@@ -5,12 +5,11 @@ import {
   LinkText,
   LogoContainer,
   LogoText,
-  DarkenBackground,
-  LogoutConfirmContainer,
   NavbarContainer,
-  SearchContainer, ConfirmText, RedButtonMarginRight
+  SearchContainer, ConfirmText
 } from './StyledNavbar'
-import { Button } from '../StyledButtons'
+import { Button, RedButtonMarginRight } from '../StyledButtons'
+import {DarkenBackground, PopupContainer} from '../StyledContainers';
 
 interface Props {
   isAuthenticated: boolean
@@ -69,13 +68,13 @@ const Navbar = ({ isAuthenticated, user, handleLogout }: Props) => {
         </LinkContainer>
       </NavbarContainer>
       <DarkenBackground show={showLogoutConfirm}>
-        <LogoutConfirmContainer>
+        <PopupContainer>
           <div>
             <ConfirmText>Are you sure you want to log out?</ConfirmText>
             <RedButtonMarginRight onClick={logoutClick}>Yes</RedButtonMarginRight>
             <Button onClick={() => setShowLogoutConfirm(false)}>No</Button>
           </div>
-        </LogoutConfirmContainer>
+        </PopupContainer>
       </DarkenBackground>
     </>
   )

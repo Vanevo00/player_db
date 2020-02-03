@@ -21,6 +21,10 @@ export const RedButton = styled(Button)`
   }
 `
 
+export const RedButtonMarginRight = styled(RedButton)`
+  margin-right: 5px;
+`
+
 export const WideButton = styled(Button)`
   width: 100%;
 `
