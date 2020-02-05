@@ -4,14 +4,17 @@ import axios from 'axios'
 import { Container, DeleteRowItem, HeaderRow, HeaderRowItem, Row, RowItem, Table } from './StyledAdmin'
 import ConfirmDelete from './ConfirmDelete'
 import formatDate from '../../utils/formatDate'
+import Spinner from '../../components/Utilities/Spinner';
 
 const Users = () => {
+  const [isLoading, setIsLoading] = useState(true)
   const [users, setUsers] = useState([])
   const [showConfirmDelete, setShowConfirmDelete] = useState(false)
   const [selectedUser, setSelectedUser] = useState()
 
   useEffect(() => {
     fetchUsers()
+    setIsLoading(false)
   }, [selectedUser])
 
   console.log(users)
@@ -53,6 +56,7 @@ const Users = () => {
               <HeaderRowItem width={0.75}>Edit</HeaderRowItem>
               <HeaderRowItem width={0.25}><i className="fas fa-trash"></i></HeaderRowItem>
             </HeaderRow>
+            {isLoading && <Spinner/>}
             {
               users.map(user => (
                 <Row key={user._id}>
