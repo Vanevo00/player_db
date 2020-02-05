@@ -9,7 +9,7 @@ import {
   SearchContainer, ConfirmText
 } from './StyledNavbar'
 import { Button, RedButtonMarginRight } from '../StyledButtons'
-import {DarkenBackground, PopupContainer} from '../StyledContainers';
+import { DarkenBackground, PopupContainer } from '../StyledContainers'
 
 interface Props {
   isAuthenticated: boolean

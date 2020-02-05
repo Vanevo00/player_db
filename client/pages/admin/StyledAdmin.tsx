@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {GrowContainer} from '../../components/StyledContainers';
+import { GrowContainer } from '../../components/StyledContainers'
 
 export const Container = styled(GrowContainer)`
   padding: 1rem 3rem;
@@ -28,6 +28,7 @@ export const RowItem = styled.div`
   min-height: 100%;
   display: flex;
   justify-content: ${props => props.center ? 'center' : 'flex-start'};
+  padding-left: ${props => !props.center && '4px'};
   align-items: center;
   width: ${props => props.width * 10}%;
   border-right: 1px solid ${props => props.theme.colors.main};

@@ -1,6 +1,6 @@
 import React from 'react'
-import {DarkenBackground, PopupContainer} from '../../components/StyledContainers'
-import {Button, RedButtonMarginRight} from '../../components/StyledButtons';
+import { DarkenBackground, PopupContainer } from '../../components/StyledContainers'
+import { Button, RedButtonMarginRight } from '../../components/StyledButtons'
 
 interface Props {
   show: boolean
@@ -10,7 +10,7 @@ interface Props {
   handlePopupClick: (answer) => void
 }
 
-const ConfirmDelete = ({show, user, handlePopupClick}: Props) => {
+const ConfirmDelete = ({ show, user, handlePopupClick }: Props) => {
   return (
     <DarkenBackground show={show}>
       <PopupContainer>
@@ -22,7 +22,7 @@ const ConfirmDelete = ({show, user, handlePopupClick}: Props) => {
         </div>
       </PopupContainer>
     </DarkenBackground>
-  );
-};
+  )
+}
 
-export default ConfirmDelete;
+export default ConfirmDelete

@@ -1,6 +1,6 @@
 import React from 'react'
 import { AdminItem, NavbarContainer, NavbarItem } from './StyledAdminNavbar'
-import Link from 'next/link';
+import Link from 'next/link'
 
 const AdminNavbar = () => {
   return (

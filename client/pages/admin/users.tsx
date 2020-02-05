@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import axios from 'axios'
-import {Container, DeleteRowItem, HeaderRow, HeaderRowItem, Row, RowItem, Table} from './StyledAdmin';
-import ConfirmDelete from './ConfirmDelete';
+import { Container, DeleteRowItem, HeaderRow, HeaderRowItem, Row, RowItem, Table } from './StyledAdmin'
+import ConfirmDelete from './ConfirmDelete'
+import formatDate from '../../utils/formatDate'
 
 const Users = () => {
   const [users, setUsers] = useState([])
@@ -12,6 +13,8 @@ const Users = () => {
   useEffect(() => {
     fetchUsers()
   }, [selectedUser])
+
+  console.log(users)
 
   const fetchUsers = async () => {
     const { data } = await axios.get('http://localhost:4000/api/users')
@@ -27,7 +30,6 @@ const Users = () => {
     if (answer) {
       try {
         await axios.delete(`http://localhost:4000/api/users/${selectedUser._id}`)
-
       } catch (err) {
         console.log(err)
       }
@@ -53,11 +55,11 @@ const Users = () => {
             </HeaderRow>
             {
               users.map(user => (
-                <Row>
+                <Row key={user._id}>
                   <RowItem width={1.5}>{user.username}</RowItem>
                   <RowItem width={3.5}>{user.email}</RowItem>
                   <RowItem width={0.5} center={true}>{user.isAdmin ? <i className="far fa-check-square"/> : <i className="fas fa-times"/>}</RowItem>
-                  <RowItem width={2}>{user.created}</RowItem>
+                  <RowItem width={2}>{formatDate(user.createdAt)}</RowItem>
                   <RowItem width={0.75} center={true}>Edit</RowItem>
                   <DeleteRowItem width={0.25} center={true} onClick={() => openPopup(user)}><i className="fas fa-trash"></i></DeleteRowItem>
                 </Row>
@@ -71,4 +73,4 @@ const Users = () => {
   )
 }
 
-export default Users;
+export default Users
