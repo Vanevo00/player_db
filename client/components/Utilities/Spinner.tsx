@@ -9,6 +9,12 @@ const stretchdelay = keyframes`
   }
 `
 
+const SpinnerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+
 const Rect1 = styled.div``
 
 const Rect2 = styled.div``
@@ -20,7 +26,6 @@ const Rect4 = styled.div``
 const Rect5 = styled.div``
 
 const SpinnerElement = styled.div`
-  margin: 100px auto;
   width: 50px;
   height: 40px;
   text-align: center;
@@ -55,13 +60,15 @@ const SpinnerElement = styled.div`
 
 const Spinner = () => {
   return (
-    <SpinnerElement>
-      <Rect1/>
-      <Rect2/>
-      <Rect3/>
-      <Rect4/>
-      <Rect5/>
-    </SpinnerElement>
+    <SpinnerContainer>
+      <SpinnerElement>
+        <Rect1/>
+        <Rect2/>
+        <Rect3/>
+        <Rect4/>
+        <Rect5/>
+      </SpinnerElement>
+    </SpinnerContainer>
   );
 };
 

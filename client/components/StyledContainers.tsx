@@ -39,6 +39,7 @@ export const PopupContainer = styled.div`
   height: 100px;
   background-color: ${props => props.theme.colors.mainBackground};
   border-radius: 8px;
+  padding: 4px;
   display: flex;
   justify-content: center;
   align-items: center;

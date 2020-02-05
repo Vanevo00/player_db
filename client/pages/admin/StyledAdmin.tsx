@@ -47,3 +47,13 @@ export const DeleteRowItem = styled(RowItem)`
     background-color: ${props => props.theme.colors.dangerLighter};
   }
 `
+
+export const EditRowItem = styled(RowItem)`
+  cursor: pointer;
+  transition: .3s;
+  
+  &:hover {
+    background-color: ${props => props.theme.colors.main};
+    color: ${props => props.theme.colors.buttonText};
+  }
+`
