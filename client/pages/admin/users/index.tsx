@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 import Layout from '../../../components/Layout'
 import axios from 'axios'
 import { Container, DeleteRowItem, EditRowItem, HeaderRow, HeaderRowItem, Row, RowItem, Table } from '../StyledAdmin'
@@ -15,8 +16,6 @@ const Users = () => {
   useEffect(() => {
     fetchUsers()
   }, [selectedUser])
-
-  console.log(users)
 
   const fetchUsers = async () => {
     setIsLoading(true)
@@ -47,7 +46,7 @@ const Users = () => {
       <Layout title='Admin/Index'>
         <ConfirmDelete show={showConfirmDelete} user={selectedUser} handlePopupClick={handlePopupClick}/>
         <Container>
-          <h2>Index</h2>
+          <h2>Users</h2>
           <Table>
             <HeaderRow>
               <HeaderRowItem width={2}>Username</HeaderRowItem>
@@ -65,7 +64,9 @@ const Users = () => {
                   <RowItem width={3.5}>{user.email}</RowItem>
                   <RowItem width={0.75} center={true}>{user.isAdmin ? <i className="far fa-check-square"/> : <i className="fas fa-times"/>}</RowItem>
                   <RowItem width={3}>{formatDate(user.createdAt)}</RowItem>
-                  <EditRowItem width={0.75} center={true}>Edit</EditRowItem>
+                  <Link href={`/admin/users/edit/${user._id}`}>
+                    <EditRowItem width={0.75} center={true}>Edit</EditRowItem>
+                  </Link>
                   <DeleteRowItem width={0.25} center={true} onClick={() => openPopup(user)}><i className="fas fa-trash"></i></DeleteRowItem>
                 </Row>
               ))

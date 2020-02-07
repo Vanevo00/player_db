@@ -2,6 +2,7 @@
 import express, { Request, Response } from 'express'
 const connectDB = require('../config/db')
 
+const cors = require('cors')
 const app = express()
 const port = 4000
 
@@ -11,6 +12,8 @@ connectDB()
 // middleware
 // @ts-ignore
 app.use(express.json({ extended: false })) // to accept body data
+
+app.use(cors()) //enable CORS
 
 // define routes
 app.use('/api/auth', require('./routes/auth'))

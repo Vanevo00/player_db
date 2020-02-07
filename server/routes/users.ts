@@ -27,6 +27,23 @@ router.get('/', auth, async (req: any, res: Response) => {
   }
 })
 
+// @route  GET api/users/:id
+// @desc   Get one user by id
+// @access Admin only
+router.get('/:id', auth, async (req: any, res: Response) => {
+  try {
+    const loggedInUser = await User.findOne({ _id: req.user.id })
+    if (!loggedInUser.isAdmin) {
+      return res.send('unauthorised, admins only')
+    }
+    const user = await User.findOne({ _id: req.params.id })
+    res.json(user)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  POST api/users
 // @desc   Register a user
 // @access Public
@@ -44,13 +61,13 @@ router.post('/', [
   const email = req.body.email.toLowerCase()
 
   try {
-    let user = await User.findOne({ username }) // try to find user by the email
+    let user = await User.findOne({ username }) // try to find user by username
 
     if (user) {
       return res.status(400).json({ errors: [{ msg: 'user with this username already exists' }] })
     }
 
-    user = await User.findOne({ email }) // try to find user by the email
+    user = await User.findOne({ email }) // try to find user by email
 
     if (user) {
       return res.status(400).json({ errors: [{ msg: 'user with this email address already exists' }] })
@@ -95,8 +112,20 @@ router.put('/:id', auth, async (req: any, res: Response) => {
     if (!user.isAdmin) {
       return res.send('unauthorised, admins only')
     }
-    await User.findByIdAndUpdate(req.params.id, req.body)
-    res.json(req.body)
+
+    let body = req.body
+
+    if (req.body.password) {
+      const saltRounds = await bcrypt.genSalt(10)
+      const password = await bcrypt.hash(req.body.password, saltRounds)
+      body = {
+        ...body,
+        password
+      }
+    }
+
+    await User.findByIdAndUpdate(req.params.id, body)
+    res.json(body)
   } catch (err) {
     console.error(err.message)
     res.status(500).send('server error')
