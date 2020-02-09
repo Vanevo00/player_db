@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Router from 'next/router'
 import Link from 'next/link'
 import {
   LinkContainer,
@@ -29,6 +30,7 @@ const Navbar = ({ isAuthenticated, user, handleLogout }: Props) => {
   const logoutClick = () => {
     handleLogout()
     setShowLogoutConfirm(false)
+    Router.push('/')
   }
 
   return (

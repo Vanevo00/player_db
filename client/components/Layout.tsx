@@ -43,7 +43,7 @@ const Layout = (props) => {
     <Fragment>
       <Head>
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet"/>
-        <title>{`Football Player DB${props.title && ': ' + props.title}`}</title>
+        <title>{`Football Player DB${props.title ? ': ' + props.title : ''}`}</title>
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle/>

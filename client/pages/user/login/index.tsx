@@ -3,7 +3,7 @@ import Router from 'next/router'
 import Layout from '../../../components/Layout'
 import { InputContainer, StyledLabel, UserContainer, StyledTextInput, ErrorMessage } from '../StyledUserPages'
 import { FormContainer } from '../../../components/StyledContainers'
-import { WideButton } from '../../../components/StyledButtons'
+import {WideButton} from '../../../components/StyledButtons'
 import axios from 'axios'
 import setAuthToken from '../setAuthToken'
 

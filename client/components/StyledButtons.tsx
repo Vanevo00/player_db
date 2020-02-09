@@ -28,3 +28,19 @@ export const RedButtonMarginRight = styled(RedButton)`
 export const WideButton = styled(Button)`
   width: 100%;
 `
+
+export const FloatingAddButton = styled.button`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: ${props => props.theme.colors.main};
+  color: ${props => props.theme.colors.buttonText};
+  font-size: 16px;
+  
+  &:hover {
+    background-color: ${props => props.theme.colors.mainLighter};
+  }
+`

@@ -3,7 +3,7 @@ import Layout from '../../../../components/Layout'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Spinner from '../../../../components/Utilities/Spinner';
-import {AvatarImg, FormContainer, GrowContainerGreen, StyledInput, UserInfoContainer} from './StyledEditUser';
+import {AvatarImg, FormContainer, GrowContainerGreen, StyledInput, UserInfoContainer, StyledCheckbox} from '../StyledUserForm';
 import {WideButton} from '../../../../components/StyledButtons';
 
 
@@ -33,9 +33,13 @@ const EditUser = () => {
   }
 
   const handleChange = (e) => {
+    const target = e.target
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const name = target.name
+
     setUser({
       ...user,
-      [e.target.name]: e.target.value
+      [name]: value
     })
   }
 
@@ -70,9 +74,13 @@ const EditUser = () => {
                   <label htmlFor='username'>Username</label>
                   <StyledInput type='text' id='username' name='username' onChange={handleChange} value={user.username}/>
                   <label htmlFor='email'>Email</label>
-                  <StyledInput type='text' id='email' name='email' onChange={handleChange} value={user.email}/>
+                  <StyledInput type='email' id='email' name='email' onChange={handleChange} value={user.email}/>
                   <label htmlFor='password'>Change password</label>
-                  <StyledInput type='text' id='password' name='password' onChange={handlePasswordChange} value={password}/>
+                  <StyledInput type='password' id='password' name='password' onChange={handlePasswordChange} value={password}/>
+                  <div>
+                    <label htmlFor='password'>Admin?</label>
+                    <StyledCheckbox type='checkbox' name='isAdmin' checked={user.isAdmin} onChange={handleChange}/>
+                  </div>
                 </UserInfoContainer>
             </FormContainer>
             <WideButton type='submit'>Submit</WideButton>

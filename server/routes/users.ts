@@ -103,6 +103,57 @@ router.post('/', [
   }
 })
 
+// @route  POST api/users/admin/create
+// @desc   Create a user (including possible admin privileges)
+// @admin only
+router.post('/admin/create', [
+  check('username', 'username must consist of 3 or more characters').isLength({ min: 3 }),
+  check('email', 'please include a valid email').isEmail(),
+  check('password', 'please enter a password with 6 or more characters').isLength({ min: 6 })
+], async (req: Request, res: Response) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+
+  const { username, password, image, favoriteClub, isAdmin } = req.body
+  const email = req.body.email.toLowerCase()
+
+  try {
+    let user = await User.findOne({ username }) // try to find user by username
+
+    if (user) {
+      return res.status(400).json({ errors: [{ msg: 'user with this username already exists' }] })
+    }
+
+    user = await User.findOne({ email }) // try to find user by email
+
+    if (user) {
+      return res.status(400).json({ errors: [{ msg: 'user with this email address already exists' }] })
+    }
+
+    user = new User({
+      username,
+      email,
+      password,
+      image,
+      favoriteClub,
+      isAdmin
+    })
+
+    // password encryption
+    const saltRounds = await bcrypt.genSalt(10)
+    user.password = await bcrypt.hash(password, saltRounds)
+
+    await user.save()
+
+    res.json(user)
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).send('server error')
+  }
+})
+
 // @route  PUT api/users
 // @desc   Update User information
 // @access Admin only

@@ -6,6 +6,7 @@ import { Container, DeleteRowItem, EditRowItem, HeaderRow, HeaderRowItem, Row, R
 import ConfirmDelete from '../ConfirmDelete'
 import formatDate from '../../../utils/formatDate'
 import Spinner from '../../../components/Utilities/Spinner';
+import {FloatingAddButton} from '../../../components/StyledButtons';
 
 const Users = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -72,6 +73,9 @@ const Users = () => {
               ))
             }
           </Table>
+          <Link href='/admin/users/create'>
+            <FloatingAddButton><i className="fas fa-user-plus"></i></FloatingAddButton>
+          </Link>
         </Container>
       </Layout>
     </>

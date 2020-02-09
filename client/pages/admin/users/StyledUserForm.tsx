@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { GrowContainer } from '../../../../components/StyledContainers'
+import { GrowContainer } from '../../../components/StyledContainers'
 
 export const GrowContainerGreen = styled(GrowContainer)`
   background-color: ${props => props.theme.colors.mainDarker};
@@ -33,3 +33,5 @@ export const StyledInput = styled.input`
   font-size: ${props => props.theme.fontSizes.m};
   margin-bottom: 1rem;
 `
+
+export const StyledCheckbox = styled.input``
